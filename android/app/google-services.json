@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "89107806854",
+    "project_id": "fir-dersleri-2e71b",
+    "storage_bucket": "fir-dersleri-2e71b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89107806854:android:5bb112e61aaf49136def07",
+        "android_client_info": {
+          "package_name": "com.example.firebaseapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC21-i5KxWCDNzMICmyCZZMtmgF1MUp7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
