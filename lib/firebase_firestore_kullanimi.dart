@@ -49,7 +49,7 @@ class _FirebaseFirestoreKullanimiState
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 25),
 
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -62,10 +62,120 @@ class _FirebaseFirestoreKullanimiState
               ),
               onPressed: () {
                 //create
+                //veriEklemeSet();
+                //ID li Veri Ekleme
                 veriEklemeSet();
               },
               child: Text(
                 "Set ile Veri Ekle",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              ),
+            ),
+            SizedBox(height: 25),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.green.shade400,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                minimumSize: Size(300, 45),
+              ),
+              onPressed: () {
+                //create
+                //veriEklemeSet();
+                //ID li Veri Ekleme
+                idVeriEklemeSet();
+              },
+              child: Text(
+                "ID ile Veri Ekle- Set",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              ),
+            ),
+            SizedBox(height: 25),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.orange.shade400,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                minimumSize: Size(300, 45),
+              ),
+              onPressed: () {
+                //Güncelleme
+                dataUpdate();
+              },
+              child: Text(
+                "Güncelleme",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              ),
+            ),
+
+            SizedBox(height: 25),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                minimumSize: Size(300, 45),
+              ),
+              onPressed: () {
+                //Güncelleme
+                dataDelete();
+              },
+              child: Text(
+                "Sil",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              ),
+            ),
+            SizedBox(height: 10),
+            Divider(thickness: 1),
+            SizedBox(height: 10),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.red.shade200,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                minimumSize: Size(300, 45),
+              ),
+              onPressed: () {
+                //Güncelleme
+                dataFieldDelete();
+              },
+              child: Text(
+                "Field Silme('Okul')",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              ),
+            ),
+
+            SizedBox(height: 10),
+            Divider(thickness: 1),
+            SizedBox(height: 10),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.red.shade300,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                minimumSize: Size(300, 45),
+              ),
+              onPressed: () {
+                //Güncelleme
+                dataMapFieldDelete();
+              },
+              child: Text(
+                "Map Silme('Okul')",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
               ),
             ),
@@ -77,15 +187,14 @@ class _FirebaseFirestoreKullanimiState
 
   void veriEklemeAdd() async {
     Map<String, dynamic> _eklencekUser = {};
-    _eklencekUser["name"] = "Sinem";
+    _eklencekUser["name"] = "Özge";
     _eklencekUser["age"] = 40;
-    _eklencekUser["isStudent"] = false;
+    _eklencekUser["school"] = "Boğaziçi Üni.";
     _eklencekUser["adress"] = {
-      "city": "edirne",
+      "yetki": "edirne",
       "distict": "selimiye",
       "street": " Yeni",
     };
-
     _eklencekUser["colors"] = FieldValue.arrayUnion((["kırmızı", "lacivert"]));
 
     await firestore.collection("users").add(_eklencekUser);
@@ -97,21 +206,45 @@ class _FirebaseFirestoreKullanimiState
     Map<String, dynamic> _eklenecekUser = {};
 
     _eklenecekUser["userID"] = yeniDocID;
-    _eklenecekUser["name"] = "Gülay";
-    _eklenecekUser["age"] = 54;
-    _eklenecekUser["school"] = "Abant İzzet Baysal";
-    _eklenecekUser["adress"] = {
-      "city": "Sakarya",
-      "disctict": "Geyve",
-      "street": "Gül Evler",
-    };
-
-    _eklenecekUser["colors"] = FieldValue.arrayUnion((["kırmızı", "lacivert"]));
+    _eklenecekUser["name"] = "Özge";
+    _eklenecekUser["age"] = 40;
+    _eklenecekUser["school"] = "Boğaziçi Üni.";
+    _eklenecekUser["adress"] = {"city": "İzmir", "street": "Çiçek"};
+    _eklenecekUser["colors"] = FieldValue.arrayUnion((["Yeşil", "Mavi"]));
     _eklenecekUser["createdAt"] = FieldValue.serverTimestamp();
-
     await firestore
         .doc("users/$yeniDocID")
         .set(_eklenecekUser, SetOptions(merge: true));
+  }
+
+  //increment(-3)=> 3'er 3'er eksilecek.
+  void idVeriEklemeSet() async {
+    await firestore.doc("users/Yl3jVLP5bldMwIPBwZse").set({
+      "age": FieldValue.increment(-3),
+    }, SetOptions(merge: true));
+  }
+
+  void dataUpdate() async {
+    await firestore.doc("users/YLwv97lorpgkixiLwE5J").update({
+      "name": "Cansu",
+      "age": 30,
+    });
+  }
+
+  void dataDelete() async {
+    await firestore.doc("users/Yl3jVLP5bldMwIPBwZse").delete();
+  }
+
+  void dataFieldDelete() async {
+    await firestore.doc("users/vJd14sxTvRWwyliCAesn").update({
+      "okul": FieldValue.delete(),
+    });
+  }
+
+  void dataMapFieldDelete() async {
+    await firestore.doc("users/vJd14sxTvRWwyliCAesn").update({
+      "adress.city": FieldValue.delete(),
+    });
   }
 }
 
@@ -143,5 +276,11 @@ Veri ekleme 2 türlü olur.
       "okul": "Marmara Üniversity",
     }, SetOptions(merge: true));
   }
+
+
+Set de güncelleme yaparken o id yoksa yeni bir Id oluşturur. 
+Add de. güncellemede ise hata fırlatır.
+
+
 
    */

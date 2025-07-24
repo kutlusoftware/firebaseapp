@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebaseapp/dataList.dart';
 import 'package:firebaseapp/firebase_firestore_kullanimi.dart';
 import 'package:firebaseapp/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: FirebaseFirestoreKullanimi(),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: DataList());
   }
 }
 
