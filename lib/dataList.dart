@@ -24,7 +24,7 @@ class _DataListState extends State<DataList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Firebase ile Veri Listeleme"),
+        title: Text("Firebase ile Veri List."),
         backgroundColor: Colors.indigo.shade300,
       ),
       body: Center(
